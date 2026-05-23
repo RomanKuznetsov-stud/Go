@@ -41,32 +41,27 @@ func main() {
 	fmt.Println("--- 1. Аналіз цілочислової послідовності ---")
 	intSeq := generateIntSequence(seed)
 
-	// 1. Розрахунок частоти інтервалів (інтервал = 1)
 	frequencies := make([]int, n)
 	for _, val := range intSeq {
 		frequencies[val]++
 	}
 
-	// 2. Розрахунок статистичної імовірності
 	probabilities := make([]float64, n)
 	for i := 0; i < n; i++ {
 		probabilities[i] = float64(frequencies[i]) / float64(K)
 	}
 
-	// Вивід кількох значень чстот та ймовірностей для демонстраціїа
 	fmt.Println("Частота та ймовірність для значень (0-4):")
 	for i := 0; i < 5; i++ {
 		fmt.Printf("  Значення %d: Частота = %d, Ймовірність = %.4f\n", i, frequencies[i], probabilities[i])
 	}
 
-	// 3. Математичне сподівання
 	var expectedValue float64
 	for i, p := range probabilities {
 		expectedValue += float64(i) * p
 	}
 	fmt.Printf("\nМатематичне сподівання: %.4f\n", expectedValue)
 
-	// 4. Дисперсія
 	var variance float64
 	for i, p := range probabilities {
 		diff := float64(i) - expectedValue
@@ -74,7 +69,6 @@ func main() {
 	}
 	fmt.Printf("Дисперсія: %.4f\n", variance)
 
-	// 5. Середньоквадратичне відхилення
 	stdDeviation := math.Sqrt(variance)
 	fmt.Printf("Середньоквадратичне відхилення: %.4f\n\n", stdDeviation)
 
